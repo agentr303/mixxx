@@ -14,6 +14,7 @@
 #include "control/controlindicatortimer.h"
 #include "controllers/controllermanager.h"
 #include "controllers/keyboard/keyboardeventfilter.h"
+#include "controllers/midi/midiclockoutputmanager.h"
 #include "controllers/scripting/controllerscriptenginebase.h"
 #include "database/mixxxdb.h"
 #include "effects/effectsmanager.h"
@@ -718,6 +719,7 @@ void CoreServices::initialize(QApplication* pApp) {
     // (long)
     qDebug() << "Creating ControllerManager";
     m_pControllerManager = std::make_shared<ControllerManager>(pConfig);
+    m_pMidiClockOutputManager = std::make_shared<MidiClockOutputManager>(m_pControllerManager.get());
 
     // Scan the library for new files and directories
     bool rescan = m_cmdlineArgs.getRescanLibrary() ||
