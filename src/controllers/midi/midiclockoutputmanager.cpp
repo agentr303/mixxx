@@ -231,7 +231,7 @@ void MidiClockOutputManager::senderThreadMain() {
         const unsigned char byte = event.byte;
         QMetaObject::invokeMethod(
                 pTarget,
-                [pTarget, byte]() { pTarget->sendBytes(QByteArray(1, static_cast<char>(byte))); },
+                [pTarget, byte]() { pTarget->sendRealTimeByte(byte); },
                 Qt::QueuedConnection);
     }
 }
