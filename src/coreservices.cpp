@@ -720,6 +720,7 @@ void CoreServices::initialize(QApplication* pApp) {
     qDebug() << "Creating ControllerManager";
     m_pControllerManager = std::make_shared<ControllerManager>(pConfig);
     m_pMidiClockOutputManager = std::make_shared<MidiClockOutputManager>(m_pControllerManager.get());
+    m_pEngine->setMidiClockGenerator(m_pMidiClockOutputManager->generator());
 
     // Scan the library for new files and directories
     bool rescan = m_cmdlineArgs.getRescanLibrary() ||
