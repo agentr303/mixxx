@@ -13,6 +13,8 @@
 #include <QtGlobal>
 
 #include "controllers/dlgprefcontrollers.h"
+#include "controllers/midi/midiclockoutputmanager.h"
+#include "preferences/dialog/dlgprefmidiclock.h"
 #include "library/library.h"
 #include "library/trackcollectionmanager.h"
 #include "moc_dlgpreferences.cpp"
@@ -58,6 +60,7 @@ DlgPreferences::DlgPreferences(
         std::shared_ptr<mixxx::skin::SkinLoader> pSkinLoader,
         std::shared_ptr<SoundManager> pSoundManager,
         std::shared_ptr<ControllerManager> pControllerManager,
+        std::shared_ptr<MidiClockOutputManager> pMidiClockOutputManager,
         std::shared_ptr<VinylControlManager> pVCManager,
         std::shared_ptr<EffectsManager> pEffectsManager,
         std::shared_ptr<SettingsManager> pSettingsManager,
