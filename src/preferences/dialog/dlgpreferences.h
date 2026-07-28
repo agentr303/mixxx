@@ -17,6 +17,7 @@
 class ControllerManager;
 class MidiClockOutputManager;
 class DlgPrefControllers;
+class DlgPrefMidiClock;
 class DlgPrefSound;
 class EffectsManager;
 class Library;
@@ -108,6 +109,7 @@ class DlgPreferences : public QDialog, public Ui::DlgPreferencesDlg {
     std::unique_ptr<DlgPrefSound> m_pSoundDlg;
     PreferencesPage m_soundPage;
     DlgPrefControllers* m_pControllersDlg;
+    DlgPrefMidiClock* m_pMidiClockDlg;
 
     QSize m_pageSizeHint;
 
