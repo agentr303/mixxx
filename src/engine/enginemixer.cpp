@@ -233,6 +233,10 @@ std::span<const CSAMPLE> EngineMixer::getSidechainBuffer() const {
 void EngineMixer::processChannels(std::size_t bufferSize) {
     // Update internal sync lock rate.
     m_pEngineSync->onCallbackStart(m_sampleRate, bufferSize);
+        if (m_pMidiClockGenerator) {
+       m_pMidiClockGenerator->process(
+               m_sampleRate, static_cast<int>(bufferSize), std::chrono::steady_clock::now());
+   }
 
     m_activeBusChannels[EngineChannel::LEFT].clear();
     m_activeBusChannels[EngineChannel::CENTER].clear();
