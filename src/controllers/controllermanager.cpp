@@ -316,6 +316,13 @@ void ControllerManager::slotSetUpDevices() {
 
         // This runs on the main thread but LegacyControllerMapping is not thread safe, so clone it.
         pController->setMapping(std::move(pMapping));
+        if (m_pMidiClockOutputManager) {
+       QMetaObject::invokeMethod(m_pMidiClockOutputManager,
+               "onControllerMappingLoaded",
+               Qt::QueuedConnection,
+               Q_ARG(QString, pController->getName()),
+               Q_ARG(QString, pMapping->filePath()));
+   }
 
         // If we are in safe mode, skip opening controllers.
         if (CmdlineArgs::Instance().getSafeMode()) {
