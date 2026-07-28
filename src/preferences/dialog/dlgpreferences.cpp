@@ -133,6 +133,14 @@ DlgPreferences::DlgPreferences(
                           pControllerRootItem),
             tr("Controllers"),
             "ic_preferences_controllers.svg");
+                QTreeWidgetItem* pMidiClockRootItem =
+           new QTreeWidgetItem(contentsTreeWidget, QTreeWidgetItem::Type);
+   m_pMidiClockDlg = new DlgPrefMidiClock(
+           this, m_pConfig, pMidiClockOutputManager.get());
+   addPageWidget(PreferencesPage(m_pMidiClockDlg,
+                         pMidiClockRootItem),
+           tr("MIDI Clock Output"),
+           "ic_preferences_controllers.svg");
 
 #ifdef __VINYLCONTROL__
     // It's important for this to be before the connect for wsound.
