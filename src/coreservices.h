@@ -17,6 +17,7 @@ class RecordingManager;
 class BroadcastManager;
 #endif
 class ControllerManager;
+class MidiClockOutputManager;
 class VinylControlManager;
 class TrackCollectionManager;
 class Library;
@@ -71,6 +72,9 @@ class CoreServices : public QObject {
     std::shared_ptr<ControllerManager> getControllerManager() const {
         return m_pControllerManager;
     }
+    std::shared_ptr<MidiClockOutputManager> getMidiClockOutputManager() const {
+       return m_pMidiClockOutputManager;
+   }
 
     std::shared_ptr<VinylControlManager> getVinylControlManager() const {
         return m_pVCManager;
@@ -130,6 +134,7 @@ class CoreServices : public QObject {
     std::shared_ptr<BroadcastManager> m_pBroadcastManager;
 #endif
     std::shared_ptr<ControllerManager> m_pControllerManager;
+    std::shared_ptr<MidiClockOutputManager> m_pMidiClockOutputManager;
 
     std::shared_ptr<VinylControlManager> m_pVCManager;
 
