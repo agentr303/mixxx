@@ -33,6 +33,12 @@ class MidiController : public Controller {
     Q_OBJECT
   public:
     explicit MidiController(const QString& deviceName);
+/// Sends a single already-formed status byte with no data bytes,
+   /// used for MIDI Real-Time messages (Clock 0xF8, Start 0xFA,
+   /// Continue 0xFB, Stop 0xFC).
+   void sendRealTimeByte(unsigned char statusByte) {
+       sendShortMsg(statusByte, 0, 0);
+   }
     ~MidiController() override;
 
     ControllerJSProxy* jsProxy() override;
