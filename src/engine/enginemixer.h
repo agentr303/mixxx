@@ -36,6 +36,8 @@ class EngineDelay;
 // engine. Prevents memory allocation in EngineMixer::addChannel.
 static constexpr int kPreallocatedChannels = 64;
 
+#include "engine/sync/midiclockgenerator.h"
+
 class EngineMixer : public QObject, public AudioSource {
     Q_OBJECT
   public:
@@ -45,6 +47,9 @@ class EngineMixer : public QObject, public AudioSource {
             ChannelHandleFactoryPointer pChannelHandleFactory,
             bool bEnableSidechain);
     ~EngineMixer() override;
+void setMidiClockGenerator(MidiClockGenerator* pGenerator) {
+       m_pMidiClockGenerator = pGenerator;
+   }
 
     // Get access to the sample buffers. None of these are thread safe. Only to
     // be called by SoundManager.
@@ -259,6 +264,7 @@ class EngineMixer : public QObject, public AudioSource {
     // m_activeTalkoverChannels with each channel that is active for the
     // respective output.
     void processChannels(std::size_t bufferSize);
+    MidiClockGenerator* m_pMidiClockGenerator{nullptr};
 
     ChannelHandleFactoryPointer m_pChannelHandleFactory;
     void applyMainEffects(std::size_t bufferSize);
