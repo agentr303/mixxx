@@ -13,6 +13,7 @@
 // Forward declaration(s)
 class Controller;
 class ControllerLearningEventFilter;
+class MidiClockOutputManager;
 class MappingInfoEnumerator;
 class LegacyControllerMapping;
 class ControllerEnumerator;
@@ -70,6 +71,11 @@ class ControllerManager : public QObject {
     /// Calls poll() on all devices that have isPolling() true.
     void slotPollDevices();
 
+  public:
+       void setMidiClockOutputManager(MidiClockOutputManager* pManager) {
+           m_pMidiClockOutputManager = pManager;
+       }
+
   private:
     void updateControllerList();
     void startPolling();
@@ -77,6 +83,7 @@ class ControllerManager : public QObject {
     void pollIfAnyControllersOpen();
     void openController(Controller* pController);
     void closeController(Controller* pController);
+    MidiClockOutputManager* m_pMidiClockOutputManager{nullptr};
 
     UserSettingsPointer m_pConfig;
     // WARNING: Do not parent m_pControllerLearningEventFilter to ControllerManager
