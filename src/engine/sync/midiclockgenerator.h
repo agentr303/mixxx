@@ -100,3 +100,4 @@ class MidiClockGenerator {
     double m_samplesUntilNextTick;
     double m_lastSamplesPerTick;
 };
+// Marks the first build attempt of this feature.
