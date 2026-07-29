@@ -135,3 +135,4 @@ void DlgPrefMidiClock::slotResetToDefaults() {
         m_pTempoSourceCombo->setCurrentIndex(sourceIdx);
     }
 }
+#include "moc_dlgprefmidiclock.cpp"
