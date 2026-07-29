@@ -820,7 +820,6 @@ void CoreServices::initializeQMLSingletons() {
     mixxx::qml::QmlSoundManagerProxy::registerManager(getSoundManager());
     mixxx::qml::QmlControllerManagerProxy::registerManager(
             getControllerManager(),
-            getMidiClockOutputManager(),
             CmdlineArgs::Instance().getControllerPreviewScreens());
 
     ControllerScriptEngineBase::registerTrackCollectionManager(getTrackCollectionManager());
@@ -892,6 +891,7 @@ std::shared_ptr<QDialog> CoreServices::makeDlgPreferences() const {
             pSkinLoader,
             getSoundManager(),
             getControllerManager(),
+            getMidiClockOutputManager(),
             getVinylControlManager(),
             getEffectsManager(),
             getSettingsManager(),
