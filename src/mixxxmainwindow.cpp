@@ -323,6 +323,7 @@ void MixxxMainWindow::initialize() {
             m_pSkinLoader,
             m_pCoreServices->getSoundManager(),
             m_pCoreServices->getControllerManager(),
+            m_pCoreServices->getMidiClockOutputManager(),
             m_pCoreServices->getVinylControlManager(),
             m_pCoreServices->getEffectsManager(),
             m_pCoreServices->getSettingsManager(),
