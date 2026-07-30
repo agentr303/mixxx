@@ -9,6 +9,7 @@
 #include "controllers/controllermanager.h"
 #include "controllers/midi/midiclockmappingflag.h"
 #include "controllers/midi/midicontroller.h"
+#include "control/controlpushbutton.h"
 
 namespace {
 // NOTE ON THE "[Master]" TEMPO SOURCE ENTRY:
@@ -42,6 +43,9 @@ MidiClockOutputManager::MidiClockOutputManager(ControllerManager* pControllerMan
           m_deviceExplicitlySet(false),
           m_stopSenderThread(false) {
     m_senderThread = std::thread(&MidiClockOutputManager::senderThreadMain, this);
+                m_pEnabledControl = std::make_unique<ControlPushButton>(ConfigKey("[MidiClock]", "enabled"));
+       m_pEnabledControl->setButtonMode(mixxx::control::ButtonMode::Toggle);
+       m_pEnabledControl->connectValueChanged(this, &MidiClockOutputManager::setEnabled);
 }
 
 MidiClockOutputManager::~MidiClockOutputManager() {
