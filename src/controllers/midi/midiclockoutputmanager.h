@@ -25,6 +25,8 @@
 
 #include <QObject>
 #include <QString>
+#include "control/controlobject.h"
+#include "control/controlproxy.h"
 #include <memory>
 #include <thread>
 
@@ -97,6 +99,7 @@ class MidiClockOutputManager : public QObject {
 
     std::unique_ptr<ControlProxy> m_pBpmControl;
     std::unique_ptr<ControlProxy> m_pPlayControl;
+    std::unique_ptr<ControlObject> m_pEnabledControl;
 
     std::thread m_senderThread;
     std::atomic<bool> m_stopSenderThread;
