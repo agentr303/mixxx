@@ -84,7 +84,7 @@ void MidiClockGenerator::process(int sampleRate,
             m_queue.push({bufferStartTime, kMidiStart});
         }
     } else if (sendTransport && playing != m_wasPlaying) {
-        m_queue.push({bufferStartTime, playing ? kMidiContinue : kMidiStop});
+        m_queue.push({bufferStartTime, playing ? kMidiStart : kMidiStop});
         if (playing) {
             // Re-align phase so the first tick after Continue lands
             // musically on the beat rather than wherever we happened
