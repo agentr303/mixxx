@@ -45,7 +45,9 @@ MidiClockOutputManager::MidiClockOutputManager(ControllerManager* pControllerMan
     m_senderThread = std::thread(&MidiClockOutputManager::senderThreadMain, this);
                 m_pEnabledControl = std::make_unique<ControlPushButton>(ConfigKey("[MidiClock]", "enabled"));
        m_pEnabledControl->setButtonMode(mixxx::control::ButtonMode::Toggle);
-       m_pEnabledControl->connectValueChanged(this, &MidiClockOutputManager::setEnabled);
+       connect(m_pEnabledControl.get(), &ControlObject::valueChanged, this, [this](double value) {
+       setEnabled(value > 0.0);
+   });
 }
 
 MidiClockOutputManager::~MidiClockOutputManager() {
