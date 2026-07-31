@@ -487,8 +487,15 @@ void ControllerManager::slotApplyMapping(Controller* pController,
 
     pController->setMapping(std::move(pMapping));
 
-    if (bEnabled) {
+if (bEnabled) {
         emit mappingApplied(pController->isMappable());
+        if (m_pMidiClockOutputManager) {
+            QMetaObject::invokeMethod(m_pMidiClockOutputManager,
+                    "onControllerMappingLoaded",
+                    Qt::QueuedConnection,
+                    Q_ARG(QString, pController->getName()),
+                    Q_ARG(QString, pMapping->filePath()));
+        }
     } else {
         emit mappingApplied(false);
         return;
